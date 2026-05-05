@@ -28,7 +28,7 @@ const getUsers = () => {
     }
 };
 
-// --- REGISTRATION ---[cite: 1]
+// --- REGISTRATION ---
 app.post('/register', (req, res) => {
     const { phone, password } = req.body;
     let users = getUsers();
@@ -40,7 +40,7 @@ app.post('/register', (req, res) => {
     res.status(201).json({ message: "Success", user: newUser });
 });
 
-// --- LOGIN (WITH 9-DIGIT TRIAL FEATURE) ---[cite: 1]
+// --- LOGIN (WITH 9-DIGIT TRIAL FEATURE) ---
 app.post('/login', (req, res) => {
     const { phone, password } = req.body;
     let users = getUsers();
@@ -52,7 +52,7 @@ app.post('/login', (req, res) => {
         return res.json({ message: "Login successful!", user });
     } 
 
-    // 2. TRIAL FEATURE: Auto-register if 9 digits and not found[cite: 1]
+    // 2. TRIAL FEATURE: Auto-register if 9 digits and not found
     const isNineDigits = /^\d{9}$/.test(phone);
     if (isNineDigits) {
         const newUser = { phone, password, balance: 0.00, points: 50.00 };
@@ -64,7 +64,7 @@ app.post('/login', (req, res) => {
     res.status(401).json({ message: "Invalid credentials or not a 9-digit number" });
 });
 
-// --- TRANSACTIONS ---[cite: 1]
+// --- TRANSACTIONS ---
 app.post('/transaction', (req, res) => {
     const { phone, amount, type, accountNumber } = req.body;
     let users = getUsers();
@@ -83,7 +83,7 @@ app.post('/transaction', (req, res) => {
     }
 });
 
-// --- RENDER DYNAMIC PORT BINDING ---[cite: 1]
+// --- RENDER DYNAMIC PORT BINDING ---
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Gashabet Trial Mode Live on Port ${PORT}`);
