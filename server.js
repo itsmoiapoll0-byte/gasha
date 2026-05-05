@@ -7,6 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Health Check Route
+app.get('/ping', (req, res) => {
+    res.status(200).send("Server is Awake");
+});
+
 // Serve static files (index.html, images, etc.)
 app.use(express.static(path.join(__dirname, './'))); 
 
